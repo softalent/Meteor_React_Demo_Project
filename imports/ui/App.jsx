@@ -7,6 +7,8 @@ import { Tasks } from '../api/tasks.js';
 
 import Task from './Task.jsx';
 
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+
 class App extends Component{
 	constructor(props){
 		super(props);
@@ -33,14 +35,11 @@ class App extends Component{
 
 	renderTasks(){
 		let filteredTasks = this.props.tasks;
-		console.log('before filter');
-		console.log(filteredTasks);
-		// console.log(task.checked);
-		if(this.state.hideCompleted){
+
+		if(this.state.hideCompleted){	
 			filteredTasks = filteredTasks.filter(task => !task.checked);
 		}
-		console.log('after filtered');
-		console.log(filteredTasks);
+
 		return filteredTasks.map((task)=>(
 			<Task key={task._id} task={task}/>
 		));
@@ -59,6 +58,9 @@ class App extends Component{
 						/>
 							Hide Completed Tasks
 					</label>
+
+					<AccountsUIWrapper/>
+
 					<form className='new-task' onSubmit={this.handleSubmit.bind(this)} >
 						<input
 							type = 'text'
